@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Post } from './posts/post.model';
+import { loginService } from './login/login-service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'my-page';
+  storedPosts : Post[] = [];
+
+
+  onAddComponent(post)
+  {
+    this.storedPosts.push(post);
+  }
 }
