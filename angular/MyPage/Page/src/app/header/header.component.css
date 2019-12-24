@@ -1,0 +1,9 @@
+img {
+    max-width: 100%;
+    max-height: 100%;
+    margin-right:1rem;
+}
+.header{
+    background-color:#5383d3;
+    color:white;
+}
