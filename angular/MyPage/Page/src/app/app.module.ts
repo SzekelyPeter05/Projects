@@ -10,6 +10,8 @@ import { MatToolbarModule } from '@angular/material';
 import {MatButtonModule} from '@angular/material/button';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import {MatCardModule} from '@angular/material/card';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +19,16 @@ import { FooterComponent } from './footer/footer.component';
     AboutUsComponent,
     ConcertsComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

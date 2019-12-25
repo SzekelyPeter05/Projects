@@ -6,8 +6,9 @@ import { postType } from './post_type';
 })
 export class DataSource {
   constructor() { }
-  Concerts: postType[] = [ { title:"Teszt", description:"teszt", pictureSrc:"teszt" },
-                           { title:"Teszt", description:"teszt", pictureSrc:"teszt" }   ];
+  Concerts: postType[] = [ { title:"Teszt", description:"teszt", pictureSrc:"../assets/img/metal_1.jpg" },
+                           { title:"Teszt", description:"teszt", pictureSrc:"../assets/img/metal_2.png" },
+                           { title:"Teszt", description:"teszt", pictureSrc:"../assets/img/metal_2.png" }   ];
 
   getConcerts()
   {

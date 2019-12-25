@@ -2,8 +2,23 @@ img {
     max-width: 100%;
     max-height: 100%;
     margin-right:1rem;
+    
 }
 .header{
-    background-color:#5383d3;
+   
+    background-image: url(../../assets/img/bg3.png);
+    background-repeat: repeat;
+    background-position: center bottom;
     color:white;
+    font-family: "Special Elite",cursive;
+    
+}
+a{
+    font-family: "Special Elite",cursive;
+}
+a:hover{
+    color: rgba(255, 0, 0, 0.562);
+}
+.logo{
+    max-width: 20%;
 }

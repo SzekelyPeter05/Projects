@@ -1,1 +1,10 @@
-<p *ngFor="let con of Concerts">{{con.title}}</p>
+<mat-card *ngFor="let con of Concerts">
+    <mat-card-title>
+        {{con.title}}
+    </mat-card-title>
+    <mat-card-content>
+        <img  [src]="con.pictureSrc" />
+        <div>{{con.description}}</div>
+    </mat-card-content>
+</mat-card>
+

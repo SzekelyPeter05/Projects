@@ -1,6 +1,7 @@
 footer{
 	position: fixed;
 	bottom: 0;
+	opacity: 0.9;
 }
 .footer-distributed{
 	background-color: #292c2f;
