@@ -1,8 +1,5 @@
-.main{
-    width: 739px;
-    position: relative;
-    left: -3695px;
-    top: 0px;
-    z-index: 800;
-    opacity: 0;
+.inner_main_slide{
+    max-width: 60%;
+    opacity: 0.97;
+    margin: auto;
 }

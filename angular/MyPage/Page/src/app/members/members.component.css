@@ -1,4 +1,4 @@
-.about_main{
+.members_main{
     background: rgba(0,0,0,.90);
    
     min-height: 530px;
@@ -15,7 +15,7 @@
     -moz-align-items: flex-start;
     align-items: flex-start;
 }
-.about_header{
+.members_header{
     margin: 10px auto;
     display: inline-block;
     position: relative;
@@ -31,25 +31,43 @@
     text-transform: uppercase;
    
 }
-.about_header_txt{
+.members_header_txt{
     text-align: center;
 }
-
 .about_picture_img{
+    max-width: 80%;
+}
+.members_picture_img{
     max-width: 100%;
     max-height: 100%;
 }
-.about_picture{
+.members_picture_left{
     float: left;
-    max-width: 50%;
+    max-width: 30%;
     max-height: 50%;
     padding : 20px;
 }
-.about_picture_txt{
+.members_picture_right{
+    float: right;
+    max-width: 30%;
+    max-height: 50%;
+    padding : 20px;
+}
+.members_picture_txt{
     position: relative;
     float: left;
+    max-width: 50%;
     
 }
-.about_content{
+.members_content{
     padding: 20px;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.wrapper{
+    display: inline-block;
 }

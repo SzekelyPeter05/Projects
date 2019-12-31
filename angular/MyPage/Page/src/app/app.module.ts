@@ -13,6 +13,13 @@ import { FooterComponent } from './footer/footer.component';
 import {MatCardModule} from '@angular/material/card';
 import { MainComponent } from './main/main.component';
 
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MainSlideComponent } from './main-slide/main-slide.component';
+import { MainNewsComponent } from './main-news/main-news.component';
+import { MainNewsItemComponent } from './main-news-item/main-news-item.component';
+import { MembersComponent } from './members/members.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +27,13 @@ import { MainComponent } from './main/main.component';
     ConcertsComponent,
     HeaderComponent,
     FooterComponent,
-    MainComponent
+    MainComponent,
+    MainSlideComponent,
+    MainNewsComponent,
+    MainNewsItemComponent,
+    MembersComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -28,7 +41,8 @@ import { MainComponent } from './main/main.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

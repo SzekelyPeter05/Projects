@@ -1,0 +1,13 @@
+<div class="news_items_wrapper">
+    <div class="item_wrapper" *ngFor="let news of newsList">
+       <a>
+            <div class="item_picture" [ngStyle]="{'background-image': 'url(' + news.pictureSrc + ')','background-size': 'cover'}">   
+            </div>
+       </a>
+        <div class="item_text">
+            <div class="item_text_date"><p class="date"> {{news.date}}</p></div>
+            <div class="item_text_title"><h4><a> {{news.title}}</a></h4></div>
+            <div class="item_text_description"><p>{{news.description}}</p></div>
+        </div>
+    </div>
+</div>

@@ -1,10 +1,19 @@
-<mat-card *ngFor="let con of Concerts">
-    <mat-card-title>
-        {{con.title}}
-    </mat-card-title>
-    <mat-card-content>
-        <img  [src]="con.pictureSrc" />
-        <div>{{con.description}}</div>
-    </mat-card-content>
-</mat-card>
+<div class="card_wraper" *ngFor="let con of Concerts">
+    <mat-card >
+        <mat-card-title>
+            {{con.title}}
+        </mat-card-title>
+        <mat-card-content>
+            <div  class="wrapper">
+                <img class="left" [src]="con.pictureSrc" />
+                <div class="left"><p class="desc_p">{{con.description}}</p></div>
+            </div>
+           
+        </mat-card-content>
+      
+    </mat-card>
+   <!-- <div class="button_wraper">  
+        
+    </div>   -->
+</div>
 

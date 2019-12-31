@@ -1,7 +1,12 @@
 footer{
-	position: fixed;
-	bottom: 0;
-	opacity: 0.9;
+	position: relative;
+	
+	width: 100%;
+   opacity: 0.9;
+   clear:both;
+   bottom: 0;
+  
+	
 }
 .footer-distributed{
 	background-color: #292c2f;
@@ -10,9 +15,9 @@ footer{
 	width: 100%;
 	text-align: left;
 	font: bold 16px sans-serif;
- 
+	opacity: 0.9;
 	padding: 55px 50px;
-	margin-top: 80px;
+	margin-top: -20px;
 }
  
 .footer-distributed .footer-left,
