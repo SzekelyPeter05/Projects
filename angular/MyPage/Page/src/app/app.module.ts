@@ -19,6 +19,7 @@ import { MainSlideComponent } from './main-slide/main-slide.component';
 import { MainNewsComponent } from './main-news/main-news.component';
 import { MainNewsItemComponent } from './main-news-item/main-news-item.component';
 import { MembersComponent } from './members/members.component';
+import { MusicComponent } from './music/music.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { MembersComponent } from './members/members.component';
     MainNewsComponent,
     MainNewsItemComponent,
     MembersComponent,
+    MusicComponent,
     
     
   ],

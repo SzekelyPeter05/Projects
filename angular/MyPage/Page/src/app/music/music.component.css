@@ -1,0 +1,25 @@
+.block__title{
+    display: inline-block;
+    position: relative;
+    font-family: "Special Elite",cursive;
+    font-size: calc(1.01852vw + 12.74px);
+    font-weight: 700;
+    padding: .5625rem 0;
+    margin: 1.125rem auto;
+    border-bottom: 1px solid #2f2f2f;
+    clear: both;
+    letter-spacing: .1em;
+    text-align: left;
+    width: 100%;
+    text-transform: uppercase;
+    color:white;
+}
+.musics{
+   background-color:  #232323;
+   margin-top: -5px;
+   opacity: 0.95;
+}
+.view_wrapper{
+    margin: auto;
+    max-width: 80%;
+}
