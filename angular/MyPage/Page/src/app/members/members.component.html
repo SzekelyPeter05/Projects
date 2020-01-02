@@ -4,7 +4,9 @@
     </div>
     <div class="members_content">
         <div class="members_picture_left">
-            <img class="about_picture_img"  [src]="member_singer"/>
+            <img class="about_picture_img" *ngIf="member_singer_need[0]"  [src]="member_singer[0]"/>
+            <img class="about_picture_img" *ngIf="member_singer_need[1]"  [src]="member_singer[1]"/>
+            <img class="about_picture_img" *ngIf="member_singer_need[2]"  [src]="member_singer[2]"/>
          </div>
         <p class="members_picture_txt">Ritkán nézelődöm az énekest kereső zenekarok online hirdetései között. Szerencsére egy júniusi vasárnap csendes délelőttjén még 2018-ban felütöttem az egyik portált, és ellapozgattam a srácok hirdetéséig: Budapesten Dream Theater tribute zenekar énekest és basszusgitárost keres.
 
@@ -22,7 +24,9 @@
     </div>
     <div class="members_content">
         <div class="members_picture_right">
-            <img class="about_picture_img"  [src]="member_gabor"/>
+            <img class="about_picture_img" *ngIf="member_gabor_need[0]"  [src]="member_gabor[0]"/>
+            <img class="about_picture_img" *ngIf="member_gabor_need[1]"  [src]="member_gabor[1]"/>
+            <img class="about_picture_img" *ngIf="member_gabor_need[2]"  [src]="member_gabor[2]"/>
          </div>
         <p class="members_picture_txt">"Pár évvel ezelőtt költöztem Budapestre és egy alkalommal Krisztiánnal és Larionnal egy jó kis sörözés közben felvetődött a kérdés, hogy mi lenne, ha csinálnánk egy közös projektet. Pár közös próba után kialakult a koncepció is, történetesen, hogy szeretnénk létrehozni egy Dream Thetater tribute zenekart.
 
@@ -41,7 +45,9 @@
     </div>
     <div class="members_content">
         <div class="members_picture_left">
-            <img class="about_picture_img"  [src]="member_krisz"/>
+            <img class="about_picture_img"  *ngIf="member_krisz_need[0]" [src]="member_krisz[0]"/>
+            <img class="about_picture_img"  *ngIf="member_krisz_need[1]" [src]="member_krisz[1]"/>
+            <img class="about_picture_img"  *ngIf="member_krisz_need[2]" [src]="member_krisz[2]"/>
          </div>
         <p class="members_picture_txt">"Nagyjából 3 éves lehettem, mikor Édesapám beültetett a dobja mögé.
 
@@ -70,7 +76,9 @@
     </div>
     <div class="members_content">
         <div class="members_picture_right">
-            <img class="about_picture_img"  [src]="member_larion"/>
+            <img class="about_picture_img" *ngIf="member_larion_need[0]"  [src]="member_larion[0]"/>
+            <img class="about_picture_img" *ngIf="member_larion_need[1]"  [src]="member_larion[1]"/>
+            <img class="about_picture_img" *ngIf="member_larion_need[2]"  [src]="member_larion[2]"/>
          </div>
         <p class="members_picture_txt">"6 éves koromban az osztályteremben a Tesla hangszóró bemondta, hogy lehet jelentkezni zenei általánosba. Jó ötletnek tűnt, és azóta kisebb megszakításokkal folyamatosan zenélek.
 
@@ -84,7 +92,9 @@
     </div>
     <div class="members_content">
         <div class="members_picture_left">
-            <img class="about_picture_img"  [src]="member_zsolt"/>
+            <img class="about_picture_img" *ngIf="member_zsolt_need[0]"  [src]="member_zsolt[0]"/>
+            <img class="about_picture_img" *ngIf="member_zsolt_need[1]"  [src]="member_zsolt[1]"/>
+            <img class="about_picture_img" *ngIf="member_zsolt_need[2]"  [src]="member_zsolt[2]"/>
          </div>
         <p class="members_picture_txt">"Körülbelül 17 éves korom óta zenélek. Először gitáron kezdtem, főleg heavy metal, thrash zenekarokban játszottam ritmusgitáros poszton. Később a korral jött a hard rock és egy kis blues. Úgy négy éve kértem kölcsön egy basszusgitárt kíváncsiságból, és teljesen magával ragadott. Rövid ideig párhuzamosan jelen volt mindkét hangszer az életemben, de mostanra teljesen egyeduralkodóvá vált a basszus.
 

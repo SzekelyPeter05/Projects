@@ -1,5 +1,10 @@
 <mat-toolbar class="header" > 
-   <div class="logo"> <a mat-button routerLink="" > <img  [src]="imageSrc" /> </a></div>
+   <div class="logo"> 
+       <a mat-button routerLink="" >
+        <img *ngIf="!imageSrcSmall" [src]="imageSrc[0]" />
+        <img *ngIf="imageSrcSmall" style="width: 20px;" [src]="imageSrc[1]" />
+       </a>
+    </div>
     <a mat-button routerLink="/about_us">About us</a>
     <a mat-button routerLink="/members">Members</a>
     <a mat-button routerLink="/concerts">Concerts</a>

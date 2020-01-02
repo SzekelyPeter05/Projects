@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {MatCardModule} from '@angular/material/card';
 import { MainComponent } from './main/main.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MainSlideComponent } from './main-slide/main-slide.component';
@@ -42,7 +43,8 @@ import { MembersComponent } from './members/members.component';
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

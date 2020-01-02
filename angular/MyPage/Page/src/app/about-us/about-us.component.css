@@ -41,15 +41,22 @@
 }
 .about_picture{
     float: left;
-    max-width: 50%;
+    max-width: 45%;
     max-height: 50%;
     padding : 20px;
-}
-.about_picture_txt{
-    position: relative;
-    float: left;
     
 }
+
 .about_content{
     padding: 20px;
+    display: inline;
+}
+.about_picture_text{
+    max-width: 40%;
+    float: left;
+    word-break: break-word;
+}
+.about_picture_txt{
+    white-space: pre-wrap;
+  
 }
