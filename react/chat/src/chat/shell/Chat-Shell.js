@@ -6,7 +6,7 @@ import ChatTitle from '../chat-title/Chat-Title';
 import MessageList from '../message/Message-List';
 import ChatForm from '../chat-form/Chat-Form';
 import { conversations, selectedConversation } from '../../data/conversations';
-import { messages } from '../../data/messages';
+
 
 import './Chat-Shell.css';
 
@@ -17,7 +17,7 @@ const ChatShell = () => {
             <ConversationList conversations={conversations} />
             <NewConversation />
             <ChatTitle selectedConversation={selectedConversation} />
-            <MessageList messages={messages} />
+            <MessageList  />
             <ChatForm />
         </div>
     );

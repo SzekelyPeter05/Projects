@@ -294,7 +294,7 @@ const initialState = {
     selectedConversation: {}
 };
 
-initialState.selectedConversation = initialState.conversations[1];
+initialState.selectedConversation = initialState.conversations[0];
 
 const conversationsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -326,16 +326,19 @@ const conversationsReducer = (state = initialState, action) => {
         return newState;
       }
       case 'NEW_MESSAGE_ADDED': {
-        const newState = { ...state };
-        newState.selectedConversation = { ...newState.selectedConversation };
+        const newState =  { ...state };
+        newState.selectedConversation =  { ...newState.selectedConversation };
         
-        newState.selectedConversation.messages.unshift(
+        newState.latestMessageText = "teszt";
+
+       newState.selectedConversation.messages.unshift(
             {
                 imageUrl: null,
-                imageAlt: null,
+                imageAlt: "teszt",
                 messageText: action.textMessage,
                 createdAt: 'Apr 16',
-                isMyMessage: true
+                isMyMessage: true,
+               
             },
         )
 

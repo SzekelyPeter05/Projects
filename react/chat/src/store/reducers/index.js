@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 
 import conversationState from './conversations';
 
-export default combineReducers({
-  conversationState
+const rootReducer = combineReducers({
+   conversation: conversationState
 });
+
+export default rootReducer;
