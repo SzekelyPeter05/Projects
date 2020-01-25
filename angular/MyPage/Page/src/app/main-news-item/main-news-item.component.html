@@ -6,7 +6,11 @@
        </a>
         <div class="item_text">
             <div class="item_text_date"><p class="date"> {{news.date}}</p></div>
-            <div class="item_text_title"><h4><a> {{news.title}}</a></h4></div>
+            <div class="item_text_title">
+                <h4 *ngIf="size[0] || size[1]"><a> {{news.title}}</a></h4>
+                <h5 *ngIf="size[2]"><a> {{news.title}}</a></h5>
+                <h6 *ngIf="size[3] || size[4]"><a> {{news.title}}</a></h6>
+            </div>
             <div class="item_text_description"><p>{{news.description}}</p></div>
         </div>
     </div>
