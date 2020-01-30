@@ -12,6 +12,11 @@ app.get('/api/customers', (req, res) => {
 
     res.json(customers);
 } );
+// Access the parse results as request.body
+app.post('/', (req , res) => {
+
+});
+
 
 const port = 5000;
 
