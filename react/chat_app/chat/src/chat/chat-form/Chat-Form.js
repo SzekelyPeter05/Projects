@@ -18,7 +18,7 @@ function ChatForm() {
             dispatch(newMessageAdded(event.target.value));
             fetch("/api/customers")
                 .then(res => res.json())
-                .then(customers => alert(customers))
+                
                
             
           }

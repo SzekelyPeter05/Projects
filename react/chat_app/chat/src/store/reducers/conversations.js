@@ -299,12 +299,14 @@ initialState.selectedConversation = initialState.conversations[0];
 const conversationsReducer = (state = initialState, action) => {
     switch (action.type) {
       case 'SELECTED_CONVERSATION_CHANGED': {
+       
         const newState = { ...state };
         newState.selectedConversation = 
-            newState.conversations.find(
-                conversation => conversation.id === action.conversationId
+           newState.conversations.find(
+                conversation => conversation.id === action.conversationId.toString()
             );
         
+       
         return newState;
       }
       case 'DELETE_CONVERSATION': {
@@ -348,5 +350,6 @@ const conversationsReducer = (state = initialState, action) => {
         return state;
     }
   }
+  
   
 export default conversationsReducer;

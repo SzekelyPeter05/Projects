@@ -8,15 +8,17 @@ import './Conversation-List.css';
 
 const ConversationList = (props) => {
     const selectedConversationIndex = useSelector(state => state.conversation.selectedConversation.id);
-    const dispatch = useDispatch();
     const conversations = useSelector(state => state.conversation.conversations)
-    const conversationItemClick = (selectedConversationIndex) => {console.log(selectedConversationIndex)} /* dispatch(conversationChanged(selectedConversationIndex)*/ 
-    alert(selectedConversationIndex);
+    const dispatch = useDispatch();
+    
+    const conversationItemClick = (selectedConversationIndex) => {dispatch(conversationChanged(selectedConversationIndex))}  
+    
     const conversationItems = conversations.map((conversation, index) => {
+        let actual_id = index + 1;
         return <ConversationItem 
             key={index}
-            key_prop={index}
-            isActive={index === parseInt(selectedConversationIndex) }
+            key_prop={actual_id}
+            isActive={actual_id === parseInt(selectedConversationIndex) }
             conversation={conversation}
             onClickItem={conversationItemClick} />;
     });
