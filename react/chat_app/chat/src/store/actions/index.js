@@ -15,4 +15,7 @@ export const newMessageAdded = textMessage => ({
 export const changeRegisterScreenn = () => ({
     type: "CHANGE_REGISTER_SCREEN"
 });
+export const changeRegisterMessage = () => ({
+    type: "REGISTER_MESSAGE_CHANGE"
+})
 

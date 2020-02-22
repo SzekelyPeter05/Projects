@@ -169,20 +169,11 @@ function SignUp() {
 
   const signUp = async ()=>{
 
-    let headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    headers.append("Access-Control-Allow-Origin", "*");
-    headers.append("Access-Control-Allow-Methods", " GET, POST, OPTIONS");
-    headers.append("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    
-    headers.append('Origin','http://localhost:5000');
+  
 
     const response = await axios.post(
-      'http://localhost:5000/api/customers',
-      { example: 'data' },
-      { headers: headers }
+      'http://localhost:5000/login',
+      { firstName : form_values.firstName, lastName: form_values.lastName, email: form_values.email, password: form_values.password}
     )
     console.log(response.data)
   }

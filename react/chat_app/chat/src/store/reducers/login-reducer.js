@@ -7,6 +7,7 @@ const initialLogin = {
     city : "",
     loggedIn : false,  /* localStorage.getItem('chat_user_name'),*/
     registerScreen : false,
+    openSuccesRegisterMessage: false;
 }
 
 const login_reducer = (state = initialLogin, action) => {
@@ -28,6 +29,12 @@ const login_reducer = (state = initialLogin, action) => {
            
             return newState;
         }
+        case 'REGISTER_MESSAGE_CHANGE' :
+            {
+                let newState = { ...state }
+                newState.openSuccesRegisterMessage = state.openSuccesRegisterMessage ? false : true;
+                return newState;
+            }
         default:
             return state;
 
