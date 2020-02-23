@@ -12,10 +12,16 @@ export const newMessageAdded = textMessage => ({
     textMessage
 });
 
-export const changeRegisterScreenn = () => ({
-    type: "CHANGE_REGISTER_SCREEN"
+export const changeRegisterScreenn = (message) => ({
+    type: "CHANGE_REGISTER_SCREEN",
+    message
 });
-export const changeRegisterMessage = () => ({
-    type: "REGISTER_MESSAGE_CHANGE"
-})
+export const closeRegisterMessage = () => ({
+    type: 'CLOSE_SUCCES_MESSAGE'
+});
+export const logIn = () => ({
+    type: 'LOG_IN'
+});
+
+
 

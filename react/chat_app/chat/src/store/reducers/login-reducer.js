@@ -7,7 +7,8 @@ const initialLogin = {
     city : "",
     loggedIn : false,  /* localStorage.getItem('chat_user_name'),*/
     registerScreen : false,
-    openSuccesRegisterMessage: false;
+    openSuccesRegisterMessage: false,
+    
 }
 
 const login_reducer = (state = initialLogin, action) => {
@@ -26,15 +27,23 @@ const login_reducer = (state = initialLogin, action) => {
         case 'CHANGE_REGISTER_SCREEN' : {
             let newState = { ...state }
             newState.registerScreen = !newState.registerScreen;
-           
+            if(action.message === "Succes"){
+                newState.openSuccesRegisterMessage =  true;
+            }
             return newState;
         }
-        case 'REGISTER_MESSAGE_CHANGE' :
-            {
-                let newState = { ...state }
-                newState.openSuccesRegisterMessage = state.openSuccesRegisterMessage ? false : true;
-                return newState;
-            }
+        case 'CLOSE_SUCCES_MESSAGE' :{
+            let newState = { ...state }
+            newState.openSuccesRegisterMessage = false;
+            return newState;
+        }
+        case 'LOG_IN' : {
+            let newState = {...state}
+            newState.loggedIn = true;
+            return newState;
+        }
+        
+      
         default:
             return state;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -15,9 +15,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import AirplayIcon from '@material-ui/icons/Airplay';
-import {changeRegisterScreenn} from '../store/actions';
+import {changeRegisterScreenn,closeRegisterMessage,logIn} from '../store/actions';
 import axios from 'axios';
-
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 
 
@@ -58,6 +59,10 @@ const LoginScreen = () => {
   );
 }
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -75,10 +80,54 @@ function Copyright() {
 function LogInd() {
   const classes = useStyles();
   const dispach = useDispatch();
+  const [openBadEmail, setBadEmail] = useState(false);
+  const [openBadPassword, setBadPassword] = useState(false);
+  const [form_values, setValues] = React.useState({
+    email: '',
+    password : ''
+  });
+  const open = useSelector(state => state.login.openSuccesRegisterMessage);
+  const handleChangeForm = ( event ) => {
+    setValues({ ...form_values, [event.target.name]: event.target.value });
+  };
+  
+  const logInUser = async (e)=>
+  {
+    e.preventDefault();
+    
+    await axios.post(
+     'http://localhost:5000/login',
+     {  email: form_values.email, password: form_values.password}
+   ).then(resp =>  { 
+                      if(resp.data ==="Succes")
+                        { 
+                          dispach(logIn())
+                        }
+                      else if(resp.data ==="BadEmail"){
+                        setBadEmail(true);
+                      }
+                      else{
+                        setBadPassword(true);
+                      }
+                    }
+           );
+   
+   
+
+  }
+  
   const ChangeSignIn = () => {
     dispach(changeRegisterScreenn());
   }
-
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    dispach(closeRegisterMessage());
+    setBadEmail(false);
+    setBadPassword(false);
+   /* setOpen(false);*/
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -90,7 +139,7 @@ function LogInd() {
         <Typography component="h1" variant="h5">
           LogIn
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={logInUser}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -101,6 +150,7 @@ function LogInd() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={handleChangeForm}
               />
             </Grid>
             <Grid item xs={12}>
@@ -113,6 +163,7 @@ function LogInd() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={handleChangeForm}
               />
             </Grid>
             <Grid item xs={12}>
@@ -143,6 +194,21 @@ function LogInd() {
       <Box mt={5}>
         <Copyright />
       </Box>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          You have registered! Have a nice day!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={openBadEmail} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+         Bad email address!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={openBadPassword} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          Bad password!
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }
@@ -152,12 +218,21 @@ function LogInd() {
 function SignUp() {
   const classes = useStyles();
   const dispach = useDispatch();
+  const [open, setOpen] = useState(false);
+  
   const [form_values, setValues] = React.useState({
     firstName: '',
     lastName: '',
     email: '',
     password : ''
   });
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+   /* setOpen(false);*/
+  };
   const handleChangeForm = ( event ) => {
     setValues({ ...form_values, [event.target.name]: event.target.value });
   };
@@ -168,21 +243,28 @@ function SignUp() {
   } 
 
   const signUp = async ()=>{
-
-  
-
-    const response = await axios.post(
-      'http://localhost:5000/login',
+    
+    let response =
+     await axios.post(
+      'http://localhost:5000/register',
       { firstName : form_values.firstName, lastName: form_values.lastName, email: form_values.email, password: form_values.password}
     )
-    console.log(response.data)
+    return response;
   }
   const signUpForm = (e) => {
     e.preventDefault();
-    signUp();
+     signUp().then(resp => 
+                      { 
+                        if(resp.data === 'Succes')
+                        { 
+                          dispach(changeRegisterScreenn(resp.data));
+                        }
+                        else{
+                          setOpen(true);
+                        }
+                      }
+      );
     
-    
-    dispach(changeRegisterScreenn());
   }
 
   return (
@@ -278,6 +360,11 @@ function SignUp() {
       <Box mt={5}>
         <Copyright />
       </Box>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          This email address is exist!
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }

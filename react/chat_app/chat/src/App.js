@@ -1,19 +1,16 @@
 import React from 'react';
 import './App.css';
 import ChatShell from './chat/shell/Chat-Shell';
-import { createStore } from 'redux'
-import  rootReducer  from './store/reducers'
-import { Provider } from 'react-redux';
 import SignUp from './login';
-const store = createStore(rootReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+import { useSelector, connect } from 'react-redux';
+import {logIn} from './store/actions';
+
 function App() {
-  const loggedIn = false;
+  
+  const loggedIn =  useSelector(state => state.login.loggedIn);
   return (
-    <Provider store={store}>
-        { !loggedIn && <SignUp /> }
-        { loggedIn && <ChatShell /> }
-    </Provider>
+          loggedIn  ? <ChatShell /> : <SignUp />
   );
 }
 
-export default App;
+export default connect(logIn)(App);

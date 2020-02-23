@@ -27,6 +27,28 @@ app.post('/api/customers',jsonParser, (req, res) => {
 } );
 // Access the parse results as request.body
 app.post('/login',jsonParser, (req , res) => {
+    dbCollection.find({email:   req.body.email.toString()}).toArray( (err,result)=> {
+        if(result.length > 0)
+        {   
+            if(result[0].password === req.body.password.toString())
+            {   
+               
+                 res.json("Succes");
+
+            }
+            else{
+                res.json("BadPassword");
+            }
+        }
+        else{
+            res.json("BadEmail");
+        }
+    }
+    )
+
+});
+// Access the parse results as request.body
+app.post('/register',jsonParser, (req , res) => {
 
      dbCollection.find({email:   req.body.email.toString()}).toArray( (err,result)=> {
         if(result.length > 0)
