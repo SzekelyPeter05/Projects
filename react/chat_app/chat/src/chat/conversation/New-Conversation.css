@@ -4,14 +4,17 @@
   
   #new-message-container {
     display: grid;
-    grid: 40px / 40px;
+    grid: 50px / 50px;
     align-content: center;
     grid-area: new-message-container;
     border-top: 1px solid rgba(0,0,0,0.25);
     border-radius: 0 0 0 10px;
-    padding: 0 15px;
+    padding: 15px 10px;
+   
   }
-  
+  .pointer{
+    cursor: pointer;
+  }
   #new-message-container button {
     display: flex;
     align-items: center;

@@ -102,6 +102,8 @@ function LogInd() {
                       if(resp.data ==="Succes")
                         { 
                           dispach(logIn())
+                          localStorage.setItem("email", form_values.email);
+                          localStorage.setItem('loggedIn',true);
                         }
                       else if(resp.data ==="BadEmail"){
                         setBadEmail(true);

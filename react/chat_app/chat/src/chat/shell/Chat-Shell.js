@@ -10,9 +10,14 @@ import { conversations, selectedConversation } from '../../data/conversations';
 
 import './Chat-Shell.css';
 
+ 
+/*  className={clsx(open && classes.hide)} */
 const ChatShell = () => {
+
     return (
+        
         <div id="chat-container">
+           
             <ConversationSearch />
             <ConversationList conversations={conversations} />
             <NewConversation />

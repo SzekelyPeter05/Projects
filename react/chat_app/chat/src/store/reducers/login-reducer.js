@@ -2,10 +2,10 @@ const initialLogin = {
     step: 1,
     firstName : "",
     lastName : "",
-    email : "",
+    email : localStorage.getItem('email') === 'undefined' ? false : localStorage.getItem('email'),
     ocupation : "",
     city : "",
-    loggedIn : false,  /* localStorage.getItem('chat_user_name'),*/
+    loggedIn : localStorage.getItem('loggedIn') === 'undefined' ? false : localStorage.getItem('loggedIn'),
     registerScreen : false,
     openSuccesRegisterMessage: false,
     
