@@ -12,13 +12,15 @@ function NewConversation() {
 
     const handleClose = () => {
         setOpen(false);
+        
     };
+   
     return (
         <div>
             <div id="new-message-container">
-                 <button class="pointer" onClick={handleClickOpen}>+</button>
+                 <button className="pointer" onClick={handleClickOpen}>+</button>
             </div>
-           <DialogNewFriend open={open} handleClose={handleClose}/>
+           <DialogNewFriend open={open} handleClose={handleClose} />
         </div>
        
     );

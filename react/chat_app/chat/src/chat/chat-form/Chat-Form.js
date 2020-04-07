@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import './Chat-Form.css';
 
 
-function ChatForm() {
+function ChatForm(props) {
 
     const [textValue,setTextValue] = useState("");
     const dispatch = useDispatch()
@@ -15,12 +15,9 @@ function ChatForm() {
         
         if (event.key === 'Enter') {
             setTextValue("");
-            dispatch(newMessageAdded(event.target.value));
-            fetch("/api/customers")
-                .then(res => res.json())
-                
-               
             
+            dispatch(newMessageAdded(event.target.value,props.socket));
+           
           }
         else{
             

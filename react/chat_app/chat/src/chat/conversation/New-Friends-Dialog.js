@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
@@ -13,6 +14,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Checkbox from '@material-ui/core/Checkbox';
 import Avatar from '@material-ui/core/Avatar';
+import {addConversations} from '../../store/actions';
+
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -24,9 +28,39 @@ const useStyles = makeStyles(theme => ({
 
 const DialogNewFriend = (props) =>{
 
-    const classes = useStyles();
-    const [checked, setChecked] = React.useState([1]);
+  const [users, setUsers] = React.useState([]);
+  const classes = useStyles();
+  const [checked, setChecked] = React.useState([1]);
+  const dispach = useDispatch();
   
+      
+  useEffect(() => 
+    {
+      async function getUserList() {
+         await axios.post('http://localhost:5000/getUsers',{email: localStorage.getItem('email')}).then(resp => {
+          setUsers(resp.data);
+          
+        });
+      }
+      getUserList()
+    }
+    , []);
+    const handleSave = () => {
+      let new_friends = checked.slice(1);
+      const saveFriends = async (friends)  => 
+      { 
+        await axios.post('http://localhost:5000/saveFriends',{user:localStorage.getItem('email'),users: friends}).then(resp => {
+            
+            let users_filtered = users.filter(item => !friends.find(find=> find === item.email));
+            setUsers(users_filtered);
+            dispach(addConversations(resp.data.friends));
+        });
+      }
+      saveFriends(new_friends);
+
+      setChecked([1]);
+      props.handleClose();
+    }
     const handleToggle = value => () => {
       const currentIndex = checked.indexOf(value);
       const newChecked = [...checked];
@@ -41,30 +75,32 @@ const DialogNewFriend = (props) =>{
     };
 
 
-    return (<Dialog open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
-    <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+    return (
+      users !== 'undefined' ? 
+    <Dialog open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+    <DialogTitle id="form-dialog-title">New friends</DialogTitle>
     <DialogContent>
     <DialogContentText>
-        To subscribe to this website, please enter your email address here. We will send updates
-        occasionally.
+       Find your new friends!
     </DialogContentText>
     <List dense className={classes.root}>
-      {[0, 1, 2, 3].map(value => {
-        const labelId = `checkbox-list-secondary-label-${value}`;
+      {users.map(value => {  
+        const labelId = `checkbox-list-secondary-label-${value.email}`;
+        const profileSrc = value.profil_path ? process.env.PUBLIC_URL + value.profil_path : null;
         return (
-          <ListItem key={value} button>
+          <ListItem key={value.email} button>
             <ListItemAvatar>
               <Avatar
-                alt={`Avatar n°${value + 1}`}
-                src={`/static/images/avatar/${value + 1}.jpg`}
+                alt={`Avatar n°${value.email}`}
+                src={profileSrc}
               />
             </ListItemAvatar>
-            <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+            <ListItemText id={labelId} primary={`${value.firstName}  ${value.lastName}`} />
             <ListItemSecondaryAction>
               <Checkbox
                 edge="end"
-                onChange={handleToggle(value)}
-                checked={checked.indexOf(value) !== -1}
+                onChange={handleToggle(value.email)}
+                checked={checked.indexOf(value.email) !== -1}
                 inputProps={{ 'aria-labelledby': labelId }}
               />
             </ListItemSecondaryAction>
@@ -77,11 +113,13 @@ const DialogNewFriend = (props) =>{
     <Button onClick={props.handleClose} color="primary">
         Cancel
     </Button>
-    <Button onClick={props.handleClose} color="primary">
-        Subscribe
+    <Button onClick={handleSave} color="primary">
+        Save
     </Button>
     </DialogActions>
-</Dialog>
+</Dialog> 
+:
+null
 );
 }
 

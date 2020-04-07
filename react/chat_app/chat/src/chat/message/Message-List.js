@@ -8,14 +8,19 @@ import './Message-List.css';
 
 const MessageList = () => {
     
-    const messages = useSelector(state => state.conversation.selectedConversation.messages)
+    const conversation = useSelector(state => state.conversation)
    
-    const messageItems = messages.map((message, index) => {
-        return <Message 
-            key={index}
-            isMyMessage={message.isMyMessage}
-            message={message} />;
-    });
+    const messageItems = typeof conversation.selectedConversation !== 'undefined' &&
+                         typeof conversation.selectedConversation.messages !== 'undefined'
+                         ?
+                        conversation.selectedConversation.messages.map((message, index) => {
+                        return <Message 
+                            key={index}
+                            isMyMessage={message.isMyMessage}
+                            message={message} />;
+                         })
+                        :
+                         null;
 
     return (
         <div id="chat-message-list">

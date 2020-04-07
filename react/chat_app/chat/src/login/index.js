@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import AirplayIcon from '@material-ui/icons/Airplay';
-import {changeRegisterScreenn,closeRegisterMessage,logIn} from '../store/actions';
+import {changeRegisterScreenn,closeRegisterMessage,logIn,logOutSy} from '../store/actions';
 import axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -50,12 +50,20 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const LoginScreen = () => {
+const LoginScreen = (props) => {
+
+  useEffect(() => {
+    
+    return function cleanup() {
+        
+    };
+  });
   
   const loginState = useSelector(state => state.login);
   
+  
   return (
-         loginState.registerScreen ? <SignUp />  :  <LogInd />
+         loginState.registerScreen ? <SignUp  />  :  <LogInd  socket={props.socket}/>
   );
 }
 
@@ -77,7 +85,7 @@ function Copyright() {
 }
 
 
-function LogInd() {
+function LogInd(props) {
   const classes = useStyles();
   const dispach = useDispatch();
   const [openBadEmail, setBadEmail] = useState(false);
@@ -99,13 +107,16 @@ function LogInd() {
      'http://localhost:5000/login',
      {  email: form_values.email, password: form_values.password}
    ).then(resp =>  { 
-                      if(resp.data ==="Succes")
+                      if(resp.data.type ==="Succes")
                         { 
-                          dispach(logIn())
                           localStorage.setItem("email", form_values.email);
                           localStorage.setItem('loggedIn',true);
+                          localStorage.setItem('profilePic',resp.data.profilePath);
+                         
+                          dispach(logIn(form_values.email))
+
                         }
-                      else if(resp.data ==="BadEmail"){
+                      else if(resp.data.type ==="BadEmail"){
                         setBadEmail(true);
                       }
                       else{
@@ -238,6 +249,7 @@ function SignUp() {
   const handleChangeForm = ( event ) => {
     setValues({ ...form_values, [event.target.name]: event.target.value });
   };
+
 
  
   const ChangeSignIn = () => {
@@ -373,4 +385,4 @@ function SignUp() {
 
 
 
-export default connect(changeRegisterScreenn)(LoginScreen);
+export default connect(changeRegisterScreenn,logOutSy)(LoginScreen);

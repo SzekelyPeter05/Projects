@@ -16,3 +16,6 @@
 #chat-title > img {
     cursor: pointer;
 }
+.MuiIconButton-root{
+    padding: 0px;
+}

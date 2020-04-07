@@ -40,6 +40,15 @@ const login_reducer = (state = initialLogin, action) => {
         case 'LOG_IN' : {
             let newState = {...state}
             newState.loggedIn = true;
+            newState.email = action.email;
+           
+            
+            return newState;
+        }
+        case 'LOG_OUT' : {
+            let newState = {...state}
+            newState.loggedIn = false;
+            action.socket.emit("log_out");;
             return newState;
         }
         

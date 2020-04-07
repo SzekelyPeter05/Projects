@@ -6,25 +6,40 @@ import ChatTitle from '../chat-title/Chat-Title';
 import MessageList from '../message/Message-List';
 import ChatForm from '../chat-form/Chat-Form';
 import { conversations, selectedConversation } from '../../data/conversations';
+import ChatProfile from '../chat-profile/chat-profile';
+
+
+
 
 
 import './Chat-Shell.css';
 
  
 /*  className={clsx(open && classes.hide)} */
-const ChatShell = () => {
+const ChatShell = (props) => {
 
+    const wrapperStyle = {
+        display: "flex",
+      };
+    const  pictureStyle = {
+        minWidth : "5%",
+    }
     return (
-        
-        <div id="chat-container">
-           
-            <ConversationSearch />
-            <ConversationList conversations={conversations} />
-            <NewConversation />
-            <ChatTitle selectedConversation={selectedConversation} />
-            <MessageList  />
-            <ChatForm />
+        <div style={wrapperStyle}>
+            <div style={pictureStyle}>
+                <ChatProfile/>
+            </div>
+         
+           <div id="chat-container">
+                <ConversationSearch />
+                <ConversationList conversations={conversations} />
+                <NewConversation />
+                <ChatTitle selectedConversation={selectedConversation} socket={props.socket} />
+                <MessageList  />
+                <ChatForm socket={props.socket} />
+          </div>
         </div>
+        
     );
 }
 
