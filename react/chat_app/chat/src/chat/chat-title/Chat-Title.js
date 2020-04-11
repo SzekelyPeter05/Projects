@@ -13,8 +13,9 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import {logOutSy} from '../../store/actions';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector, connect} from 'react-redux';
 import NewAvatar from '../chat-new-avatar/chat-new-avatar';
+import { setInitial  } from '../../store/actions';
 
 const StyledMenu = withStyles({
     paper: {
@@ -52,11 +53,12 @@ const StyledMenu = withStyles({
 const ChatTitle = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [openNewAvatar, setOpenNewAvatar] = React.useState(false);
+    const conState = useSelector(state => state.conversation);
     const dispatch = useDispatch();
     const logOut = () => {
       localStorage.removeItem("email");
       localStorage.removeItem("loggedIn");
-      localStorage.removeItem("profilePic");
+     
       dispatch(logOutSy(props.socket));
     }
     
@@ -71,9 +73,10 @@ const ChatTitle = (props) => {
     const uploadPicture = () =>{
       setOpenNewAvatar(true);
     }
+    let name = typeof  conState.firstName !== 'undefined' ? conState.firstName + ' ' + conState.lastName : null;
     return (
         <div id="chat-title">
-            <span>{props.selectedConversation.title}</span>
+            <span>{name}</span>
             <Toolbar>
                 <IconButton
                 color="inherit"
@@ -116,4 +119,4 @@ const ChatTitle = (props) => {
     );
 }
 
-export default ChatTitle;
+export default connect(setInitial)(ChatTitle);

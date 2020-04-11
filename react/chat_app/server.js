@@ -15,7 +15,7 @@ const dbConnectionUrl   = "mongodb+srv://peter:0Da56c47@cluster0-p7rus.mongodb.n
 const app = express();
 const server = http.createServer(app);
 var fs = require('fs');
-const io = socketIo(server);/*, 'polling'*/
+const io = socketIo(server, {pingTimeout: 20000, pingInterval: 20000});/*, 'polling'*/
 
 app.use(cors())
 var users = {};
@@ -53,13 +53,13 @@ app.post('/saveAvatar',jsonParser, (req , res) => {
     require("fs").writeFile("chat/public" + public_url, base64Data, 'base64', function(err) {
       if(err)
       {
-        res.json("fail");
+        res.json({type : "fail"});
         
       }
       else{
         
         dbCollection.updateOne({email: req.body.user},{ $set: {profil_path : public_url}});
-        res.json('Succes');
+        res.json({type: 'Succes', path: public_url});
         
       }
      
@@ -68,6 +68,7 @@ app.post('/saveAvatar',jsonParser, (req , res) => {
 });
 // Access the parse results as request.body
 app.post('/login',jsonParser, (req , res) => {
+  
     dbCollection.find({email:   req.body.email.toString()}).toArray( (err,result)=> {
         if(result.length > 0)
         {   
@@ -173,27 +174,35 @@ function initialize(
     });
 }
 
+io.use(function(socket, next){
+  var joinServerParameters = JSON.parse(socket.handshake.query.joinServerParameters);
+  if (joinServerParameters.token == "xxx" ){
+    next();          
+  } else {
+    //next(new Error('Authentication error'));                  
+  }
+  return;       
+});
 io.on("connection", socket => {
-  console.log("asd");
+  
   socket.on("disconnect", function() {
-    console.log(users.toArray().length);
-    if(users.length > 0)  
+    
+    if(Object.keys(users).length > 0)  
     {
-      users.splice(users.indexOf(socket.email), 1);
-      
+      delete users[socket.email] 
     }
   });
   socket.on("log_out", function() {
     
-    if(users.length > 0)  
+    if(Object.keys(users).length > 0)  
     {
-      users.splice(users.indexOf(socket.email), 1);
+      delete users[socket.email] 
       
     }
   });
   socket.on("private", function(data) {  
     
-    console.log("private");
+    
     if(typeof users[data.to] !== 'undefined') 
       {   
         users[data.to].emit("private", {  msg: data.msg });
@@ -218,7 +227,10 @@ io.on("connection", socket => {
 
   });
   socket.on("login", function(data) {  
+    socket.email = data.email;
     users[data.email] = socket;
+    
+    
   });
   socket.onerror = (evt) => {
     

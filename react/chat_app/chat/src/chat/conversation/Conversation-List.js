@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect, useSelector, useDispatch  } from  'react-redux';
-import { conversationChanged,setConversations  } from '../../store/actions';
+import { conversationChanged,setInitial  } from '../../store/actions';
 import {addConversations} from '../../store/actions';
 
 import ConversationItem from './Conversation-Item';
@@ -43,4 +43,4 @@ const ConversationList = (props) => {
     );
 }
 
-export default connect(conversationChanged,setConversations,addConversations)(ConversationList);
+export default connect(conversationChanged,setInitial,addConversations)(ConversationList);

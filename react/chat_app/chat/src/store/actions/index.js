@@ -20,9 +20,10 @@ export const changeRegisterScreenn = (message) => ({
 export const closeRegisterMessage = () => ({
     type: 'CLOSE_SUCCES_MESSAGE'
 });
-export const logIn = (email) => ({
+export const logIn = (email,path) => ({
     type: 'LOG_IN',
-    email
+    email,
+    path
 });
 export const logOutSy = (socket) => ({
     type: 'LOG_OUT',
@@ -36,6 +37,22 @@ export const addConversations = (friends) => ({
     type: 'ADD_CONVERSATIONS',
     friends
 });
+export const refreshProfile = (path)=>({
+    type: 'REFRESH_PROFILE',
+    path
+});
+export const setName = (first,last)=>({
+    type: 'SET_NAME',
+    first,
+    last
+});
+export const setInitial = (conversations,profile_path,firstName,lastName)=> ({
+    type: 'SET_INITIAL',
+    conversations,
+    profile_path,
+    firstName,
+    lastName
+})
 
 
 

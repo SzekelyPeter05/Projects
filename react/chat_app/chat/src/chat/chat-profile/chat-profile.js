@@ -1,6 +1,8 @@
 
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import {refreshProfile,setInitial} from '../../store/actions';
+import { connect, useSelector } from 'react-redux';
 
 
 
@@ -16,10 +18,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ChatProfile() {
+const ChatProfile =  () => {
   const classes = useStyles();
-  const img_tag = localStorage.getItem('profilePic') ?
-                                               <img src={process.env.PUBLIC_URL + localStorage.getItem('profilePic')} alt="profile" />
+  const conState =  useSelector(state => state.conversation);
+  const img_tag = conState.profile_path ?
+                                               <img src={process.env.PUBLIC_URL + conState.profile_path} alt="profile" />
                                                      :
                                                 null;
  
@@ -30,3 +33,5 @@ export default function ChatProfile() {
     </div>
   );
 }
+
+export default connect(refreshProfile,setInitial)(ChatProfile);

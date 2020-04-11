@@ -13,6 +13,28 @@ initialState.selectedConversation = initialState.conversations[0];
 const conversationsReducer = (state = initialState, action) => {
     
     switch (action.type) {
+      case 'SET_NAME' : {
+        let newState = { ...state }
+        newState.firstName = action.first;
+        newState.lastName  = action.last;
+        return newState;
+       }
+      case 'REFRESH_PROFILE'  : {
+        let newState = {...state}
+        newState.profile_path  = action.path;
+        return newState;
+      }
+      case 'SET_INITIAL' : {
+        let newState = {...state}
+        newState.conversations =  action.conversations;
+        
+        newState.conversations.map((item, index) => item.id = index + 1);
+        newState.selectedConversation = newState.conversations[0];
+        newState.firstName = action.firstName;
+        newState.lastName  = action.lastName;
+        newState.profile_path  = action.profile_path;
+        return newState;
+      }
       case 'LOG_OUT' : {
         let newState = {...state}
        
@@ -67,6 +89,7 @@ const conversationsReducer = (state = initialState, action) => {
       case 'NEW_MESSAGE_ADDED': {
         const newState =  { ...state };
         newState.selectedConversation =  { ...newState.selectedConversation };
+        
         action.socket.emit("private", { msg: action.textMessage,
                                         to: newState.selectedConversation.email,
                                         from:localStorage.getItem('email'),

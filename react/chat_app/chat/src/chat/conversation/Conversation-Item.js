@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ConversationItem = (props) => {
     let className = 'conversation';
+    let avatar_name = props.conversation.firstName.charAt(0) + props.conversation.lastName.charAt(0);
 
     if (props.isActive) {
         className += ' active';
@@ -36,7 +37,7 @@ const ConversationItem = (props) => {
 
     return (
         <div className={className} onClick={props.onClickItem.bind(this,props.key_prop)}>
-            <Avatar className={classes.purple} alt={props.conversation.imageAlt} src={props.conversation.imageUrl}>OP</Avatar>
+            <Avatar className={classes.purple} alt={props.conversation.imageAlt} src={props.conversation.imageUrl}>{avatar_name}</Avatar>
             
             <div className="title-text">{props.conversation.title}</div>
             <div className="created-date">{props.conversation.createdAt}</div>

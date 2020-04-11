@@ -111,9 +111,9 @@ function LogInd(props) {
                         { 
                           localStorage.setItem("email", form_values.email);
                           localStorage.setItem('loggedIn',true);
-                          localStorage.setItem('profilePic',resp.data.profilePath);
                          
-                          dispach(logIn(form_values.email))
+                         
+                          dispach(logIn(form_values.email,resp.data.profilePath))
 
                         }
                       else if(resp.data.type ==="BadEmail"){

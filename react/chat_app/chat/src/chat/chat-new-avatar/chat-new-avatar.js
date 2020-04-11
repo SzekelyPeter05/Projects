@@ -9,6 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import AvatarSetter from './avatar-form';
 import Typography from '@material-ui/core/Typography';
+import { useDispatch } from 'react-redux'
+import {refreshProfile} from '../../store/actions';
 import axios from 'axios';
 
 
@@ -57,30 +59,38 @@ export default function NewAvatar(props) {
   
   
   const [preview, setPreview] = useState(null);
-
+  const dispatch = useDispatch()
   const handleClose = () => {
     props.setOpen(false);
   };
+  
+  const save = () =>{
+    saveAvatar().then(resp =>  {                     
+            if(resp.data.type ==="Succes")
+              { 
+                
+                dispatch(refreshProfile(resp.data.path));
+                props.setOpen(false);
+                 
+              
+              
+              }
+            else if(resp.data.type ==="fail"){
+            
+            }
+            else{
+              
+            }
+          }
+);
+  }
   const saveAvatar = async () => {
       
-      await axios.post(
+    let request =  await axios.post(
         'http://localhost:5000/saveAvatar',
         {  content: preview, user: localStorage.getItem('email')}
-      ).then(resp =>  {   
-                          
-                         if(resp.data ==="Succes")
-                           { 
-                            props.setOpen(false);
-                            localStorage.setItem('profilePic', "/users/"+localStorage.getItem('email')+"/profile/prof.png");
-                           }
-                         else if(resp.data ==="fail"){
-                          
-                         }
-                         else{
-                           
-                         }
-                       }
-              );
+      )
+      return request;
     
   };
 
@@ -95,7 +105,7 @@ export default function NewAvatar(props) {
                 <AvatarSetter  setPreview={setPreview} preview={preview}/>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={saveAvatar} color="primary">
+          <Button autoFocus onClick={save} color="primary">
             Save changes
           </Button>
         </DialogActions>
