@@ -3,14 +3,17 @@ import './App.css';
 import ChatShell from './chat/shell/Chat-Shell';
 import SignUp from './login';
 import { useSelector,useDispatch } from 'react-redux';   /*connect*/
-import {setInitial} from './store/actions';   /*logIn*/
+import {setInitial, receiveMessage} from './store/actions';   /*logIn*/
 import axios from 'axios';
 
 
 function App(props) {
 
   const dispatch = useDispatch();
- 
+  props.socket.on('private', (obj)=> {
+    dispatch(receiveMessage(obj.msg,obj.from,obj.imageUrl));
+  
+  })
  
   const loginState =  useSelector(state => state.login);
   if(loginState.loggedIn)
@@ -18,7 +21,7 @@ function App(props) {
      props.socket.emit("login", { email : loginState.email});
       
       axios.post(
-      'http://localhost:5000/GetConversations',
+      'http://szekelypeter.com/GetConversations',
       {  email: loginState.email }
     ).then(resp =>  { 
           

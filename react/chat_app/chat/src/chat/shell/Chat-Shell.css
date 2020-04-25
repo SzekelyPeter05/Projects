@@ -1,8 +1,10 @@
+
 #chat-container {
+  display: -ms-grid;
   display: grid;
   grid:
       'search-container chat-title' 10%
-      'conversation-list chat-message-list' 80%
+      'conversation-list chat-message-list-wrapper' 80%
       'new-message-container chat-form' 11%
       / 30% 70%;
   min-width: 70%;

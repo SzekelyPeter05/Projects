@@ -87,7 +87,7 @@ export default function NewAvatar(props) {
   const saveAvatar = async () => {
       
     let request =  await axios.post(
-        'http://localhost:5000/saveAvatar',
+        'http://szekelypeter.com/saveAvatar',
         {  content: preview, user: localStorage.getItem('email')}
       )
       return request;

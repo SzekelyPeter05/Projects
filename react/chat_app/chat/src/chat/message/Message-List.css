@@ -1,23 +1,44 @@
 #chat-message-list {
-    grid-area: chat-message-list;
-    display: flex;
-    flex-direction: column-reverse;
-    padding: 0 20px;
-    overflow-y: scroll;
-  }
   
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  padding: 0 20px;
+  flex-grow: 1;
+
+  }
+ #chat-message-list-wrapper{
+  grid-area: chat-message-list-wrapper;
+ 
+  
+  overflow-y: scroll;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+ }
+ 
   .message-row {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 70%;
     grid-template-columns: 70%;
     margin-bottom: 20px;
   }
   
   .message-content {
+    display: -ms-grid;
     display: grid;
   }
   
   .you-message {
-    justify-content: end;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: end;
   }
   
   .you-message .message-content {
@@ -29,12 +50,14 @@
   }
   
   .other-message .message-content {
+    -ms-grid-columns: 48px 15px 1fr;
     grid-template-columns: 48px 1fr;
     grid-column-gap: 15px;
   }
   
   .message-row img {
     border-radius: 100%;
+    -ms-grid-row-span: 2;
     grid-row: span 2;
   }
   

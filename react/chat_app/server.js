@@ -9,15 +9,41 @@ const registerModel     = require("./server/mongoSchema");
 const saveFriends       = require("./server/saveFriends");
 const getUsers          = require("./server/getUsers");
 const GetConversations  = require("./server/GetConversations");
+const path              = require('path');
 
 
 const dbConnectionUrl   = "mongodb+srv://peter:0Da56c47@cluster0-p7rus.mongodb.net/test?retryWrites=true&w=majority";
 const app = express();
+// Add headers
+/*app.use(function (req, res, next) {
+
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  // Pass to next layer of middleware
+  next();
+});*/
 const server = http.createServer(app);
 var fs = require('fs');
-const io = socketIo(server, {pingTimeout: 20000, pingInterval: 20000});/*, 'polling'*/
 
-app.use(cors())
+
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, 'chat/build')));
+
+
+app.use(cors()) // { origin: '*', credentials: true }
 var users = {};
 app.use(express.static('/users'));
 var dbCollection;
@@ -137,6 +163,8 @@ app.post('/register',jsonParser, (req , res) => {
 const port = 5000;
 
 server.listen(port, () => console.log( `Server started on port ${port} `));
+const io = socketIo(server, {pingTimeout: 20000, pingInterval: 20000});/*, 'polling'*/
+
 
 const dbName = "chat";
 const dbCollectionName = "user";
@@ -175,16 +203,19 @@ function initialize(
 }
 
 io.use(function(socket, next){
-  var joinServerParameters = JSON.parse(socket.handshake.query.joinServerParameters);
-  if (joinServerParameters.token == "xxx" ){
+/*  var joinServerParameters = JSON.parse(socket.handshake.query.joinServerParameters);
+  if (joinServerParameters.token == "xxx" ){ */
+  
     next();          
-  } else {
+ /* } else {*/
     //next(new Error('Authentication error'));                  
-  }
+ /* }*/
   return;       
 });
+//Allow Cross Domain Requests
+
 io.on("connection", socket => {
-  
+  console.log("teszt");
   socket.on("disconnect", function() {
     
     if(Object.keys(users).length > 0)  
@@ -202,10 +233,10 @@ io.on("connection", socket => {
   });
   socket.on("private", function(data) {  
     
-    
+   
     if(typeof users[data.to] !== 'undefined') 
-      {   
-        users[data.to].emit("private", {  msg: data.msg });
+      {  
+        users[data.to].emit("private", {  msg: data.msg, from: data.from, imageUrl: data.imageUrl });
       }
       let newPrivateMessageFrom = {
         imageUrl: null,
@@ -235,4 +266,8 @@ io.on("connection", socket => {
   socket.onerror = (evt) => {
     
   }
+});
+// Handles any requests that don't match the ones above
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'/chat/build/index.html'));
 });

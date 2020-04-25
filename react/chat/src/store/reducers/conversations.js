@@ -334,7 +334,7 @@ const conversationsReducer = (state = initialState, action) => {
        newState.selectedConversation.messages.unshift(
             {
                 imageUrl: null,
-                imageAlt: "teszt",
+                imageAlt: action.textMessage,
                 messageText: action.textMessage,
                 createdAt: 'Apr 16',
                 isMyMessage: true,

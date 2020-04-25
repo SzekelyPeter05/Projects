@@ -16,8 +16,8 @@ const Message = (props) => {
     return (
         <div className={messageClass}>
             <div className="message-content">
-                {imageThumbnail}
-                <div className="message-text">
+                {imageThumbnail}g
+                <div className="messae-text">
                     {props.message.messageText}
                 </div>
                 <div className="message-time">{props.message.createdAt}</div>

@@ -37,7 +37,7 @@ const DialogNewFriend = (props) =>{
   useEffect(() => 
     {
       async function getUserList() {
-         await axios.post('http://localhost:5000/getUsers',{email: localStorage.getItem('email')}).then(resp => {
+         await axios.post('http://szekelypeter.com/getUsers',{email: localStorage.getItem('email')}).then(resp => {
           setUsers(resp.data);
           
         });
@@ -49,7 +49,7 @@ const DialogNewFriend = (props) =>{
       let new_friends = checked.slice(1);
       const saveFriends = async (friends)  => 
       { 
-        await axios.post('http://localhost:5000/saveFriends',{user:localStorage.getItem('email'),users: friends}).then(resp => {
+        await axios.post('http://szekelypeter.com/saveFriends',{user:localStorage.getItem('email'),users: friends}).then(resp => {
             
             let users_filtered = users.filter(item => !friends.find(find=> find === item.email));
             setUsers(users_filtered);

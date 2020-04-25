@@ -1,4 +1,5 @@
 import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
 
 import './Message.css';
 
@@ -10,7 +11,7 @@ const Message = (props) => {
         messageClass += ' you-message';
     } else {
         messageClass += ' other-message';
-        imageThumbnail = <img src={props.message.imageUrl} alt={props.message.imageAlt} />;
+        imageThumbnail = <Avatar alt={props.message.imageAlt} src={props.message.imageUrl} /> ;
     }
 
     return (

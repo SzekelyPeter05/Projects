@@ -13,12 +13,18 @@ const initialLogin = {
 const login_reducer = (state = initialLogin, action) => {
    
     switch (action.type) {
-      
         case 'CLOSE_SUCCES_MESSAGE' :{
             let newState = { ...state }
             newState.openSuccesRegisterMessage = false;
             return newState;
         }
+        case 'CHANGE_REGISTER_SCREEN' : {
+            let newState = {...state}
+            newState.registerScreen = state.registerScreen ? false : true;
+
+            return newState;
+        }
+      
         case 'LOG_IN' : {
             let newState = {...state}
             newState.loggedIn = true;

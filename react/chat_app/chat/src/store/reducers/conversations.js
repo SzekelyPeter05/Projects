@@ -109,6 +109,25 @@ const conversationsReducer = (state = initialState, action) => {
 
         return newState;
       }
+      case 'RECEIVE_MESSAGE_ADDED': {
+        const newState =  { ...state };
+        if(newState.selectedConversation.email === action.from)
+        {
+          newState.selectedConversation =  { ...newState.selectedConversation };
+          newState.latestMessageText = action.textMessage;
+          newState.selectedConversation.messages.unshift(
+            {
+                imageUrl: action.imageUrl,
+                imageAlt: action.msg,
+                messageText: action.msg,
+                createdAt: 'Apr 16',
+                isMyMessage: false,
+               
+            })
+        }
+
+        return newState;
+      }
      
       default:
         return state;

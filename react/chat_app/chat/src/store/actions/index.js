@@ -52,7 +52,13 @@ export const setInitial = (conversations,profile_path,firstName,lastName)=> ({
     profile_path,
     firstName,
     lastName
-})
+});
+export const receiveMessage = (msg,from,imageUrl) =>({
+    type: 'RECEIVE_MESSAGE_ADDED',
+    msg,
+    from,
+    imageUrl
+});
 
 
 

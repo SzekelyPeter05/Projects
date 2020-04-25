@@ -22,7 +22,7 @@ const ChatProfile =  () => {
   const classes = useStyles();
   const conState =  useSelector(state => state.conversation);
   const img_tag = conState.profile_path ?
-                                               <img src={process.env.PUBLIC_URL + conState.profile_path} alt="profile" />
+                                               <img src={'http://szekelypeter.com/' + conState.profile_path} alt="profile" />
                                                      :
                                                 null;
  
