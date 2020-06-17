@@ -72,19 +72,26 @@ app.post('/saveAvatar',jsonParser, (req , res) => {
     let public_url = "/users/"+req.body.user+"/profile/prof.png";
     var base64Data = req.body.content.replace(/^data:image\/png;base64,/, "");
     // Assuming that 'path/file.txt' is a regular file.
-    require("fs").unlink("chat/public/users/"+req.body.user+"/profile/prof.png", (err) => {
-        if (err) {};
+    require("fs").unlink("chat/build/users/"+req.body.user+"/profile/prof.png", (err) => {
+        if (err) { console.log(err) };
         
     });
-    require("fs").writeFile("chat/public" + public_url, base64Data, 'base64', function(err) {
+    require("fs").writeFile("chat/build" + public_url, base64Data, 'base64', function(err) {
       if(err)
       {
+        console.log(err)
         res.json({type : "fail"});
         
       }
       else{
         
         dbCollection.updateOne({email: req.body.user},{ $set: {profil_path : public_url}});
+        dbCollection.find({"friends.email":  req.body.user})
+        .project({ email: 1, _id: 0 }).toArray((err,result) => {
+          result.map(arr => {
+            dbCollection.updateOne({email: arr.email,"friends.email" : req.body.user },{ $set: { "friends.$.imageUrl" : public_url}});
+          });
+        });
         res.json({type: 'Succes', path: public_url});
         
       }
@@ -215,16 +222,16 @@ io.use(function(socket, next){
 //Allow Cross Domain Requests
 
 io.on("connection", socket => {
-  console.log("teszt");
+  
   socket.on("disconnect", function() {
-    
+ 
     if(Object.keys(users).length > 0)  
     {
       delete users[socket.email] 
     }
   });
   socket.on("log_out", function() {
-    
+   
     if(Object.keys(users).length > 0)  
     {
       delete users[socket.email] 
@@ -233,7 +240,7 @@ io.on("connection", socket => {
   });
   socket.on("private", function(data) {  
     
-   
+    console.log(Object.keys(users).length);
     if(typeof users[data.to] !== 'undefined') 
       {  
         users[data.to].emit("private", {  msg: data.msg, from: data.from, imageUrl: data.imageUrl });
@@ -268,6 +275,6 @@ io.on("connection", socket => {
   }
 });
 // Handles any requests that don't match the ones above
-app.get('*', (req,res) =>{
+app.get('/chat', (req,res) =>{
   res.sendFile(path.join(__dirname+'/chat/build/index.html'));
 });

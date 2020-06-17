@@ -21,7 +21,7 @@ const conversationsReducer = (state = initialState, action) => {
        }
       case 'REFRESH_PROFILE'  : {
         let newState = {...state}
-        newState.profile_path  = action.path;
+        newState.profile_path  = action.path + '?$' +  Date.now();
         return newState;
       }
       case 'SET_INITIAL' : {
@@ -96,7 +96,7 @@ const conversationsReducer = (state = initialState, action) => {
                                         imageUrl : newState.selectedConversation.imageUrl });
         newState.latestMessageText = action.textMessage;
 
-       newState.selectedConversation.messages.unshift(
+       newState.selectedConversation.messages.push(
             {
                 imageUrl: null,
                 imageAlt: action.textMessage,
@@ -115,7 +115,7 @@ const conversationsReducer = (state = initialState, action) => {
         {
           newState.selectedConversation =  { ...newState.selectedConversation };
           newState.latestMessageText = action.textMessage;
-          newState.selectedConversation.messages.unshift(
+          newState.selectedConversation.messages.push(
             {
                 imageUrl: action.imageUrl,
                 imageAlt: action.msg,

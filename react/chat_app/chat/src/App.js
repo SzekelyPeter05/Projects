@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import ChatShell from './chat/shell/Chat-Shell';
 import SignUp from './login';
@@ -10,10 +10,16 @@ import axios from 'axios';
 function App(props) {
 
   const dispatch = useDispatch();
-  props.socket.on('private', (obj)=> {
-    dispatch(receiveMessage(obj.msg,obj.from,obj.imageUrl));
+  useEffect(()=> {
+    if(!props.socket.hasListeners("private"))
+    {
+      props.socket.on('private', (obj)=> {
+      dispatch(receiveMessage(obj.msg,obj.from,obj.imageUrl));
+         })
+    }
+  });
+
   
-  })
  
   const loginState =  useSelector(state => state.login);
   if(loginState.loggedIn)
@@ -21,7 +27,7 @@ function App(props) {
      props.socket.emit("login", { email : loginState.email});
       
       axios.post(
-      'http://szekelypeter.com/GetConversations',
+      'http://szekelypeter.com:5000/GetConversations',
       {  email: loginState.email }
     ).then(resp =>  { 
           

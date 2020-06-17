@@ -68,18 +68,15 @@ export default function NewAvatar(props) {
     saveAvatar().then(resp =>  {                     
             if(resp.data.type ==="Succes")
               { 
-                
                 dispatch(refreshProfile(resp.data.path));
-                props.setOpen(false);
-                 
-              
-              
+                
+                props.setOpen(false);            
               }
             else if(resp.data.type ==="fail"){
-            
+             
             }
             else{
-              
+             
             }
           }
 );
@@ -87,7 +84,7 @@ export default function NewAvatar(props) {
   const saveAvatar = async () => {
       
     let request =  await axios.post(
-        'http://szekelypeter.com/saveAvatar',
+        'http://szekelypeter.com:5000/saveAvatar',
         {  content: preview, user: localStorage.getItem('email')}
       )
       return request;

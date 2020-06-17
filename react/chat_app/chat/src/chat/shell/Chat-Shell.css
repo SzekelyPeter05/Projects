@@ -3,8 +3,8 @@
   display: -ms-grid;
   display: grid;
   grid:
-      'search-container chat-title' 10%
-      'conversation-list chat-message-list-wrapper' 80%
+      'search-container chat-title' 8%
+      'conversation-list chat-message-list-wrapper' 83%
       'new-message-container chat-form' 11%
       / 30% 70%;
   min-width: 70%;
@@ -15,5 +15,16 @@
   background: #FFF;
   border-radius: 10px;
   margin-left : 3%;
+  margin-top: 1%;
 
+}
+@media screen and (max-width: 700px) {
+  #chat-container{
+    grid:
+      'search-container chat-title' 8%
+      'conversation-list chat-message-list-wrapper' 80%
+      'new-message-container chat-form' 11%
+      / 30% 70%;
+     margin-top: 6%;
+  }
 }

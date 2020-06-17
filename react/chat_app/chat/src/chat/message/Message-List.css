@@ -23,22 +23,19 @@
  }
  
   .message-row {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 70%;
-    grid-template-columns: 70%;
+   
+    display: flex;
     margin-bottom: 20px;
   }
   
   .message-content {
-    display: -ms-grid;
-    display: grid;
+    display: flex;
   }
   
   .you-message {
-    -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: end;
+    -webkit-box-pack: flex-end;
+        -ms-flex-pack: flex-end;
+            justify-content: flex-end;
   }
   
   .you-message .message-content {

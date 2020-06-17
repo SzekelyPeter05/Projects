@@ -8,6 +8,7 @@ import { createStore } from 'redux';
 import  rootReducer  from './store/reducers';
 import { Provider } from 'react-redux';
 import socket from './store/mySocket';
+
 const store = createStore(rootReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());;
 
 

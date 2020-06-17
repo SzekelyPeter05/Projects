@@ -11,7 +11,7 @@ var connectionOptions =  {
 };
 
 /*var joinServerParameters = { token: "xxx"   };   */
-var socket   = socketIOClient("http://szekelypeter.com", connectionOptions); /*"szekelypeter.com",{transports: [ 'polling' ], timeout: 90000, query: 'joinServerParameters=' + JSON.stringify(joinServerParameters) } */
+var socket   = socketIOClient("http://szekelypeter.com:5000", connectionOptions); /*"szekelypeter.com",{transports: [ 'polling' ], timeout: 90000, query: 'joinServerParameters=' + JSON.stringify(joinServerParameters) } */
 
 
 socket.onerror = (err) => {

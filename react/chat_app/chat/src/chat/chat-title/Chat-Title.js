@@ -76,7 +76,7 @@ const ChatTitle = (props) => {
     let name = typeof  conState.firstName !== 'undefined' ? conState.firstName + ' ' + conState.lastName : null;
     return (
         <div id="chat-title">
-            <span>{name}</span>
+            <span id="chat-title-name">{name}</span>
             <Toolbar>
                 <IconButton
                 color="inherit"

@@ -27,10 +27,11 @@ function ChatForm(props) {
         setTextValue(event.target.value);
         
     }
+   /* <img src={require("../../images/icons/attachment-logo.svg")} alt="Add Attachment" /> */
     return (
        
             <div id="chat-form">
-                <img src={require("../../images/icons/attachment-logo.svg")} alt="Add Attachment" />
+               
                 <input type="text" value={textValue} onKeyDown={senMessage} onChange={handleChange}    placeholder="type a message" />
             </div> 
       

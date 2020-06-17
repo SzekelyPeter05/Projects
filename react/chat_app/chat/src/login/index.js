@@ -104,7 +104,7 @@ function LogInd(props) {
     e.preventDefault();
     
     await axios.post(
-     'http://szekelypeter.com/login',
+     'http://szekelypeter.com:5000/login',
      {  email: form_values.email, password: form_values.password}
    ).then(resp =>  { 
                       if(resp.data.type ==="Succes")
@@ -260,7 +260,7 @@ function SignUp() {
     
     let response =
      await axios.post(
-      'http://szekelypeter.com/register',
+      'http://szekelypeter.com:5000/register',
       { firstName : form_values.firstName, lastName: form_values.lastName, email: form_values.email, password: form_values.password}
     )
     return response;

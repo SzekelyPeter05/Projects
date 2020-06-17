@@ -16,7 +16,7 @@ function NewConversation() {
     };
    
     return (
-        <div>
+        <div style={{maxHeight:'100%'}}>
             <div id="new-message-container">
                  <button className="pointer" onClick={handleClickOpen}>+</button>
             </div>

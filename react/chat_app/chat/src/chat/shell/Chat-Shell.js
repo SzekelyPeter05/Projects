@@ -13,22 +13,26 @@ import ChatProfile from '../chat-profile/chat-profile';
 
 
 import './Chat-Shell.css';
-
+import useMediaQuery from '@material-ui/core/useMediaQuery';
  
 /*  className={clsx(open && classes.hide)} */
 const ChatShell = (props) => {
-
+    const isSmallScreen = useMediaQuery('(max-width: 700px)');
     const wrapperStyle = {
         display: "flex",
       };
     const  pictureStyle = {
         minWidth : "5%",
     }
+    let prifile_div = !isSmallScreen ? <div style={pictureStyle}>
+                         <ChatProfile/>
+                      </div>
+                      : null;
+                             
+                       
     return (
         <div style={wrapperStyle}>
-            <div style={pictureStyle}>
-                <ChatProfile/>
-            </div>
+            {prifile_div}
          
            <div id="chat-container">
                 <ConversationSearch />
