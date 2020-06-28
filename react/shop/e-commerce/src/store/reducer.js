@@ -1,5 +1,6 @@
 const initialState = {
-    selectedScreen : "main"
+    selectedScreen : "main",
+    logoUrl : "./img/logo.png",
 };
 
 const shopReducer = (state = initialState, action) => {
@@ -8,6 +9,11 @@ const shopReducer = (state = initialState, action) => {
       case 'SET_SCREEN' : {
         let newState = { ...state }
         newState.selectedScreen = action.screen;
+        return newState;
+       }
+       case 'SET_LOGO' : {
+        let newState = { ...state }
+        newState.logoUrl = action.url;
         return newState;
        }
       default :

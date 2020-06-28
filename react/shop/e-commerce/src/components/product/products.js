@@ -1,10 +1,19 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import {changeLogoUrl} from '../../store/actions';
 
 const Products = ()=>{
+	const dispatch = useDispatch();
 	const history = useHistory();
-	const openProduct = (id)=>{
-		history.push("Product/" + id);
+	const openProduct = (id_val)=>{
+		history.push({
+			pathname: '/Product',
+			search: '?id=' + id_val,
+			state: { id: id_val }
+		  })
+		
+		dispatch(changeLogoUrl("../img/logo.png"));
 	}
 
     return (

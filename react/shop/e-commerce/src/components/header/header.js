@@ -1,6 +1,17 @@
 import React from 'react';
+import {useSelector, connect} from 'react-redux';
+import {changeLogoUrl} from '../../store/actions';
+
 
 const Header = () => {
+
+    let imageLogo = useSelector(state => state.logoUrl);
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    if(urlParams.get('id'))
+    {
+      imageLogo = "../img/logo.png" 
+    }
 
     return (
      <div id="header">
@@ -9,7 +20,7 @@ const Header = () => {
             
             <div className="header-logo">
               <a className="logo" href="szekelypeter.com">
-                <img src="./img/logo.png" alt="" />
+                <img src={imageLogo} alt="" />
               </a>
             </div>
             <div className="header-search">
@@ -101,4 +112,4 @@ const Header = () => {
     );
 }
 
-export default Header;
+export default connect(changeLogoUrl)(Header);

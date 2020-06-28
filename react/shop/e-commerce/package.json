@@ -27,6 +27,7 @@
     "eject": "react-scripts eject",
     "preinstall": "npx npm-force-resolutions"
   },
+ 
   "eslintConfig": {
     "extends": "react-app"
   },

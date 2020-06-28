@@ -1,15 +1,18 @@
 import React, {useEffect} from 'react';
-import {
-	useParams
-  } from "react-router-dom";
 
 const Product = ()=> {
-	let { id } = useParams();
+	
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const id = urlParams.get('id');
+	
 	useEffect(() => {
 		const script = document.createElement("script");
 		script.src = "/js/main.js";
 		script.async = true;
 		document.body.appendChild(script);
+		
+		
 	 return ()=>{
 		 document.body.removeChild(script);
 	 }
@@ -25,27 +28,27 @@ const Product = ()=> {
 								<img src={`../Products/${id}/img/main-product01.jpg`} alt="" />
 							</div>
 							<div className="product-view">
-								<img src="./img/main-product02.jpg" alt="" />
+								<img src={`../Products/${id}/img/main-product02.jpg`} alt="" />
 							</div>
 							<div className="product-view">
-								<img src="./img/main-product03.jpg" alt="" />
+								<img src={`../Products/${id}/img/main-product03.jpg`} alt="" />
 							</div>
 							<div className="product-view">
-								<img src="./img/main-product04.jpg" alt="" />
+								<img src={`../Products/${id}/img/main-product04.jpg`} alt="" />
 							</div>
 						</div>
 						<div id="product-view">
 							<div className="product-view">
-								<img src="./img/thumb-product01.jpg" alt="" />
+								<img src={`../Products/${id}/img/thumb-product01.jpg`} alt="" />
 							</div>
 							<div className="product-view">
-								<img src="./img/thumb-product02.jpg" alt="" />
+								<img src={`../Products/${id}/img/thumb-product02.jpg`} alt="" />
 							</div>
 							<div className="product-view">
-								<img src="./img/thumb-product03.jpg" alt="" />
+								<img src={`../Products/${id}/img/thumb-product03.jpg`} alt="" />
 							</div>
 							<div className="product-view">
-								<img src="./img/thumb-product04.jpg" alt="" />
+								<img src={`../Products/${id}/img/thumb-product04.jpg`} alt="" />
 							</div>
 						</div>
 					</div>

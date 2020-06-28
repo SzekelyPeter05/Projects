@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import WomanSideDropDown from './womanDropDown';
 import ManSideDropDown from './manDropdown';
 
-const categoryNav = ()=>{
+const CategoryNav = ()=>{
     
+    const [isOpen,setIsOpen] = useState(true);
+    
+    const categoryList = ()=>{
+        isOpen ? setIsOpen(false) : setIsOpen(true);
+    }
+
     return (
-    <div className="category-nav">
+    <div className="category-nav" onClick={ ()=> {categoryList()}}>
     <span className="category-header">Categories <i className="fa fa-list"></i></span>
-    <ul className="category-list open">
+    <ul className={isOpen ?  "category-list open" :  "category-list"}>
         <WomanSideDropDown />
         <li><a href="/#">Men’s Clothing</a></li>
         <ManSideDropDown />
@@ -91,4 +97,4 @@ const categoryNav = ()=>{
 </div>);
 }
 
-export default categoryNav;
+export default CategoryNav;

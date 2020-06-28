@@ -8,10 +8,10 @@
     menuToggle = $('#responsive-nav .menu-nav .menu-header'),
     menuList = $('#responsive-nav .menu-nav .menu-list');
 
-  catToggle.on('click', function() {
+ /* catToggle.on('click', function() {
     menuList.removeClass('open');
     catList.toggleClass('open');
-  });
+  });*/
 
   menuToggle.on('click', function() {
     catList.removeClass('open');

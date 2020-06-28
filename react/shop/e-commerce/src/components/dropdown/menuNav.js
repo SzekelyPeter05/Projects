@@ -1,18 +1,23 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import {setScreen} from '../../store/actions';
+import { useHistory } from "react-router-dom";
+import {setScreen,changeLogoUrl} from '../../store/actions';
 
 const MenuNav = ()=> {
-    const dispatch = useDispatch()
+	const dispatch = useDispatch()
+	const history = useHistory();
 	const openScreen = (screen) => {
+		history.push("/");
 		dispatch(setScreen(screen));
+		dispatch(changeLogoUrl("./img/logo.png"));
+		
 	}
     return (
         <div className="menu-nav">
 					<span className="menu-header">Menu <i className="fa fa-bars"></i></span>
 					<ul className="menu-list">
-						<li><a href="/#" onClick={ () =>openScreen('main')}>Home</a></li>
-						<li><a href="/#" onClick={() =>openScreen('shop')}>Shop</a></li>
+						<li><a href="/#" onClick={ (event) => {event.preventDefault(); openScreen('main')}}>Home</a></li>
+						<li><a href="/#"  onClick={(event) => {event.preventDefault();openScreen('shop')}}>Shop</a></li>
 						<li className="dropdown mega-dropdown"><a href="/#" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Women <i className="fa fa-caret-down"></i></a>
 							<div className="custom-menu">
 								<div className="row">

@@ -24,12 +24,12 @@ function App() {
 
 
   return (
-	<Router>
+	<Router >
 		<div>
 			<Header/>
 			<Navigation />
-			<Switch >
-				<Route path="/Product/:id">
+			<Switch  >
+				<Route path="/Product">
             		<Product />
           		</Route>
 				<Route path="/">
