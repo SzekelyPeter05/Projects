@@ -7,6 +7,7 @@ import Product from './components/product/product';
 import Products from './components/product/products';
 import {  useSelector, connect } from 'react-redux'
 import {setScreen} from './store/actions';
+
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -20,11 +21,12 @@ import './App.css';
 function App() {
 
 	const Page  =  useSelector(state => state.selectedScreen) ;
-	const mainScreen = Page === "main" ?  <MainArea /> : Page === "product" ? <Product /> : Page === "shop" ? <Products /> : null;
-
-
+	const mainScreen = Page === "main" ?  <MainArea /> 
+					 : Page === "product" ? <Product /> 
+					 : Page === "shop" ? <Products  /> 
+					 : null;	
   return (
-	<Router >
+	<Router  >
 		<div>
 			<Header/>
 			<Navigation />

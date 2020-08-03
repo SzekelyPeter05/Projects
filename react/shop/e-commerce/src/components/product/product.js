@@ -1,16 +1,20 @@
 import React, {useEffect} from 'react';
+import {useSelector} from 'react-redux'
 
 const Product = ()=> {
 	
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	const id = urlParams.get('id');
+	const products = useSelector(state => state.products);
 	
 	useEffect(() => {
 		const script = document.createElement("script");
 		script.src = "/js/main.js";
 		script.async = true;
 		document.body.appendChild(script);
+		const product = products.find(product=> product.prod_id === id);
+     	console.log(product);
 		
 		
 	 return ()=>{

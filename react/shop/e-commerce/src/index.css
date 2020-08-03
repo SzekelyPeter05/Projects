@@ -1520,7 +1520,7 @@
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
  @font-face{font-family:'FontAwesome';src:url('fonts/fontawesome-webfont.eot?v=4.7.0');src:url('fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'),url('fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),url('fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'),url('fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'),url('fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');font-weight:normal;font-style:normal}
- .fa{display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale; top:10px; position: relative}
+ .fa{display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale; position: relative}
  .fa-lg{font-size:1.33333333em;line-height:.75em;vertical-align:-15%}
  .fa-2x{font-size:2em}
  .fa-3x{font-size:3em}
@@ -1568,6 +1568,7 @@
  .fa-star-o:before{content:"\f006"}
  .fa-user:before{content:"\f007"}
  .fa-film:before{content:"\f008"}
+ .fa-th-large{top:10px}
  .fa-th-large:before{content:"\f009"}
  .fa-th:before{content:"\f00a"}
  .fa-th-list:before{content:"\f00b"}
@@ -1655,6 +1656,7 @@
  .fa-arrow-left:before{content:"\f060"}
  .fa-arrow-right:before{content:"\f061"}
  .fa-arrow-up:before{content:"\f062"}
+ .fa-arrow-down{top:13px;}
  .fa-arrow-down:before{content:"\f063"}
  .fa-mail-forward:before,.fa-share:before{content:"\f064"}
  .fa-expand:before{content:"\f065"}
@@ -1677,6 +1679,7 @@
  .fa-chevron-up:before{content:"\f077"}
  .fa-chevron-down:before{content:"\f078"}
  .fa-retweet:before{content:"\f079"}
+ .fa-shopping-cart{ top:10px;}
  .fa-shopping-cart:before{content:"\f07a"}
  .fa-folder:before{content:"\f07b"}
  .fa-folder-open:before{content:"\f07c"}
@@ -1740,6 +1743,7 @@
  .fa-save:before,.fa-floppy-o:before{content:"\f0c7"}
  .fa-square:before{content:"\f0c8"}
  .fa-navicon:before,.fa-reorder:before,.fa-bars:before{content:"\f0c9"}
+ .fa-bars{top:10px}
  .fa-list-ul:before{content:"\f0ca"}
  .fa-list-ol:before{content:"\f0cb"}
  .fa-strikethrough:before{content:"\f0cc"}
@@ -2673,7 +2677,7 @@ body {
   
   .main-btn, .primary-btn {
     display: inline-block;
-    padding: 10px 15px;
+    padding: 10px 25px;
     text-transform: uppercase;
     font-weight: 700;
     border: none;

@@ -2,16 +2,73 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import {setScreen,changeLogoUrl} from '../../store/actions';
+import axios from 'axios';
+import ProductListItem from '../product/product-list-item';
 
 const MenuNav = ()=> {
+	let products = null;
 	const dispatch = useDispatch()
 	const history = useHistory();
-	const openScreen = (screen) => {
+	const openScreen = async (screen) => {
 		history.push("/");
-		dispatch(setScreen(screen));
+		if(screen === 'shop')
+		{
+				await getData();
+		}
+		
+		dispatch(setScreen(screen,products));
 		dispatch(changeLogoUrl("./img/logo.png"));
 		
 	}
+	const getData = async ()=>{
+		await axios.post(
+			'http://szekelypeter.com:5001/getProducts'
+		  ).then(resp=> {   products = resp.data.products.map((product,index)=>{
+			
+			if(index % 3 === 0)
+			{	
+				
+				return(
+					<div  key={index}>
+					<div className="clearfix visible-md visible-lg"></div>
+					<ProductListItem prodId={product.prod_id}
+									   new={product.new}
+									   sale={product.sale}
+									   name={product.name}
+									   oldPrice={product.oldPrice}
+									   newPrice={product.newPrice}
+									   imgSrc={'./Products/'+ product.prod_id+'/img/' + product.image_src}
+									   openProduct={openProduct} />
+					</div>				   
+						)
+						
+			}
+			else{
+				return(
+					<ProductListItem    key={index}
+										prodId={product.prod_id}
+										new={product.new}
+										sale={product.sale}
+										name={product.name}
+										oldPrice={product.oldPrice}
+										newPrice={product.newPrice}
+										imgSrc={'./Products/'+ product.prod_id+'/img/' + product.image_src}
+										openProduct={openProduct} />
+									   )	
+			}
+		  });
+					
+			});
+		
+	}
+	const openProduct = (id_val)=>{
+		history.push({
+			pathname: '/Product',
+			search: '?id=' + id_val,
+			state: { id: id_val }
+		  })
+		  dispatch(changeLogoUrl("../img/logo.png"));
+		}
     return (
         <div className="menu-nav">
 					<span className="menu-header">Menu <i className="fa fa-bars"></i></span>

@@ -1,6 +1,7 @@
-export const setScreen = (screen) => ({
+export const setScreen = (screen, products) => ({
     type: 'SET_SCREEN',
-    screen: screen
+    screen: screen,
+    products: products
 });
 export const changeLogoUrl = (url) => (
     {
